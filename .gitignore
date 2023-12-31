@@ -1,0 +1,6 @@
+*.o
+.flavor
+.objs
+mpv_puppet.so
+assets.h
+cert

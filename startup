@@ -1,0 +1,5 @@
+#!/bin/sh
+MPV_SOCKET=/tmp/mpv_socket
+
+mpv --player-operation-mode=pseudo-gui --input-ipc-server=$MPV_SOCKET &> /dev/null &
+kodev run

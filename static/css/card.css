@@ -1,0 +1,38 @@
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    grid-gap: 20px;
+
+    max-width:1024px;
+	max-width:64rem;
+	margin:20px auto;
+	margin:1.25rem auto;
+	padding:20px;
+	padding:1.051%;
+}
+
+.card {
+    display: grid;
+    grid-template-rows: max-content 200px 1fr;
+}
+
+.card img {
+    object-fit: cover;
+    width: 100%;
+}
+
+.card h2 {
+    margin: 0;
+    padding: .5rem;
+}
+
+.card .content {
+    padding: .5rem;
+    word-break: break-word;
+}
+
+.card footer {
+    background-color: #333;
+    color: #fff;
+    padding: .5rem;
+}

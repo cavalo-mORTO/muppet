@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>muppet</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css" integrity="sha256-XoaMnoYC5TH6/+ihMEnospgm0J1PM/nioxbOUdnM8HY=" crossorigin="anonymous">
+<link rel="stylesheet" href="/static/css/styles.css">
+<style>
+body,h1 {font-family: "Montserrat", sans-serif}
+img {margin-bottom: -7px}
+.w3-row-padding img {margin-bottom: 12px}
+</style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<nav class="w3-sidebar w3-black w3-animate-top w3-xxlarge" style="display:none;padding-top:150px" id="mySidebar">
+  <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-black w3-xxlarge w3-padding w3-display-topright" style="padding:6px 24px">
+    <i class="fa fa-remove"></i>
+  </a>
+  <div class="w3-bar-block w3-center">
+    <a href="#" class="w3-bar-item w3-button w3-text-grey w3-hover-black">About</a>
+    <a href="#" class="w3-bar-item w3-button w3-text-grey w3-hover-black">Photos</a>
+    <a href="#" class="w3-bar-item w3-button w3-text-grey w3-hover-black">Shop</a>
+    <a href="#" class="w3-bar-item w3-button w3-text-grey w3-hover-black">Contact</a>
+  </div>
+</nav>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-content" style="max-width:1500px">
+
+<!-- Header -->
+<div class="w3-white w3-top">
+<header class="w3-center w3-margin-bottom">
+	<div class="topnav">
+		<input type="text" placeholder="Filter.." id="filter" onkeypress="filter(event)">
+	</div>
+
+	<h1 style="font-weight: bold;max-width: 90%;display: inline-block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;" id="video-title"></h1>
+  <div id="video-controls" class="controls" data-state="hidden">
+	  <button id="ffminus" type="button" data-state="ffminus"><i class="fa fa-fast-backward"></i></button>
+	  <button id="fminus" type="button" data-state="fplus"><i class="fa fa-backward"></i></button>
+	  <button id="playpause" type="button" data-state="play"><i id="playpause_iframe" class="fa fa-play"></i></button>
+	  <button id="stop" type="button" data-state="stop"><i class="fa fa-stop"></i></button>
+	  <button id="fplus" type="button" data-state="fplus"><i class="fa fa-forward"></i></button>
+	  <button id="ffplus" type="button" data-state="ffplus"><i class="fa fa-fast-forward"></i></button>
+	  <div class="progress">
+		  <progress style="width: 50%" id="progress" value="0" min="0">
+			  <span id="progress-bar"></span>
+		  </progress>
+	  </div>
+	  <button id="mute" type="button" data-state="mute"><i id="mute_iframe" class="fa fa-volume-mute"></i></button>
+	  <button id="volinc" type="button" data-state="volup"><i class="fa fa-volume-up"></i></button>
+	  <button id="voldec" type="button" data-state="voldown"><i class="fa fa-volume-down"></i></button>
+	  <button id="sub" type="button" data-state="cc">CC</button>
+	  <button id="audio_track" type="button" data-state="audio_track">A</button>
+	  <button id="video_track" type="button" data-state="video_track">V</button>
+  </div>
+  <p class="w3-padding-16"></p>
+</header>
+</div>
+
+<!-- Photo Grid -->
+<div class="w3-row-padding w3-center" id="myGrid" style="margin-bottom:128px; margin-top:290px">
+	{{# media-files }}
+	<img class="card" data-path="{{ path }}" src="{{ image }}" alt="{{ title }}">
+	{{/ media-files }}
+</div>
+
+<!-- End Page Content -->
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-padding-64 w3-light-grey w3-center w3-opacity w3-xlarge" style="margin-top:128px"> 
+  <i class="fa fa-facebook-official w3-hover-opacity"></i>
+  <i class="fa fa-instagram w3-hover-opacity"></i>
+  <i class="fa fa-snapchat w3-hover-opacity"></i>
+  <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+  <i class="fa fa-twitter w3-hover-opacity"></i>
+  <i class="fa fa-linkedin w3-hover-opacity"></i>
+  <p class="w3-medium">Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">w3.css</a></p>
+</footer>
+ 
+<script>
+// Toggle grid padding
+//function myFunction() {
+//  var x = document.getElementById("myGrid");
+//  if (x.className === "w3-row") {
+//    x.className = "w3-row-padding";
+//  } else { 
+//    x.className = x.className.replace("w3-row-padding", "w3-row");
+//  }
+//}
+
+// Open and close sidebar
+function w3_open() {
+  document.getElementById("mySidebar").style.width = "100%";
+  document.getElementById("mySidebar").style.display = "block";
+}
+
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+}
+
+function filter(e) {
+	var x = e.key;
+	if (x == "Enter") {
+		var v = document.getElementById("filter").value.toLowerCase();
+		document.querySelectorAll('img.card').forEach(i => {
+			i.hidden = i.alt.toLowerCase().includes(v) ? false : true;
+		});
+	}
+}
+</script>
+
+<script src="/static/js/video-player.js"></script>
+<script>
+
+        var video = {};
+        var ws = null;
+
+        document.querySelectorAll('img.card').forEach(item => {
+            item.addEventListener('click', function(e) {
+                ws.send('{ "command": ["loadfile", "' + this.dataset.path + '"] }\n');
+            });
+        });
+
+        connect();
+
+        function connect() {
+            ws = new WebSocket('ws://' + window.location.hostname + ':' + window.location.port + '/connect');
+
+            ws.onopen = function() {
+                console.log("Socket is open");
+                ws.send('{ "command": ["observe_property", 1, "media-title"] }\n');
+                ws.send('{ "command": ["observe_property", 1, "playback-time"] }\n');
+                ws.send('{ "command": ["observe_property", 1, "duration"] }\n');
+                ws.send('{ "command": ["observe_property", 1, "volume"] }\n');
+                ws.send('{ "command": ["observe_property", 1, "pause"] }\n');
+                ws.send('{ "command": ["observe_property", 1, "play"] }\n');
+                ws.send('{ "command": ["observe_property", 1, "mute"] }\n');
+
+                videoPlayer().init();
+            }
+
+            ws.onmessage = function (e) {
+                var data = e.data.split('\n');
+                data.forEach(msg => {
+                    try {
+                        var m = JSON.parse(msg);
+                        video[m.name] = m.data;
+                    } catch { }
+                });
+
+                videoPlayer().update();
+            }
+
+            ws.onclose = function (e) {
+                console.log('Socket is closed. Reconnect will be attempted in 1 second. ' + e.reason);
+                setTimeout(function() { connect(); }, 1000);
+            }
+
+            ws.onerror = function (e) {
+                console.log('Socket encountered error: ' + e.message + '\nClosing socket');
+                ws.close();
+            }
+        }
+
+    </script>
+
+</body>
+</html>
